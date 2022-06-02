@@ -67,14 +67,58 @@ public class EtudiantController {
 		for(int i=0; i<students.size();i++){
 		if(students.get(i).getEmail().equals(mail)) {
 			index = i;
+			break;
 		}
 		}
 		students.remove(index);
-		System.out.println(students);
-		//Etudiant e = new Etudiant();
-	//m.addAttribute("etudiant", e);	
+		//System.out.println(students);
+		
 	return "redirect:../list";
-		//return "suppression" +mail;
+		
+	}
+	
+	@GetMapping("/update/{email}")
+	
+	public String getUpdateEtudiant(@PathVariable("email") String mail, Model m)
+	{
+		int index = 0;
+		for(int i=0; i<students.size();i++)
+		   {
+		if(students.get(i).getEmail().equals(mail)) {
+			index = i;
+			break;
+		}
+		}
+		Etudiant e = students.get(index);
+		
+	    m.addAttribute("etudiant", e);
+	    
+	    
+	    return "etudiant/updateEtudiant";
+		
 	}
 
+@PostMapping("/update")
+	
+	public String UpdateEtudiant(Etudiant etudiant)
+	{
+		int index = 0;
+		for(int i=0; i<students.size();i++)
+		   {
+		if(students.get(i).getEmail().equals(etudiant.getEmail())) {
+			index = i;
+			break;
+		}
+		}
+		students.get(index).setNom(etudiant.getNom());
+		students.get(index).setAge(etudiant.getAge());
+		students.get(index).setEmail(etudiant.getEmail());
+		//Etudiant e = students.get(index);
+		
+	    //m.addAttribute("etudiant", e);
+	    
+	    
+		return "redirect:list";
+		
+	}
 }
