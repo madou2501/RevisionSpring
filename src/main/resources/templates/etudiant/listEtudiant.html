@@ -22,7 +22,10 @@
 		<td th:text="${s.nom}"></td >
 		<td th:text="${s.email}"></td>
 		<td th:text="${s.age}"></td>
+		
+		
+		
 		<td><a href="#" class="btn btn-warning">modifier</a></td>
-		<td><a href="#" class="btn btn-danger">supprimer</a></td>
+		<td><a th:href="@{/etudiant/delete/{email}(email=${s.email})}" class="btn btn-danger">supprimer</a></td>
 	</tr>
 </table>
